@@ -1,0 +1,14 @@
+{
+  "name": "column-movement",
+  "main": "./lib/column-movement",
+  "version": "0.0.0",
+  "description": "Jump between lines of same indentation with `alt-up`/`alt-down`.",
+  "activationEvents": ["column-movement:down", "column-movement:up"],
+  "repository": "https://github.com/7even/atom-column-movement",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+  }
+}
