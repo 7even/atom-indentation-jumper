@@ -1,55 +1,52 @@
 module.exports =
 class IndentationJumper
-  down: ->
-    console.log 'moving down'
-    @jump('down')
-  
-  up: ->
-    console.log 'moving up'
-    @jump('up')
-  
-  jump: (direction) ->
-    editor = @getEditor()
-    {row, column} = editor.getCursorBufferPosition()
-    indentation = @getIndentationAt(@lineAt(row))
+  constructor: (@direction) ->
+    @editor  = atom.workspace.getActiveEditor()
+    @lastRow = @editor.getScreenLineCount() - 1
     
-    [firstRow, lastRow] = [0, editor.getScreenLineCount() - 1]
-    lastMatchingRow = currentRow
+    {@row, @column} = @editor.getCursorBufferPosition()
+    @indentation = @getIndentationAt(@lineAt(@row))
+  
+  jump: ->
+    @advance(@row)
     
-    currentRow = @next(row, direction)
-    if @matches(currentRow, indentation)
+    if @matches()
       # searching the last of adjacent matching lines
-      while firstRow <= currentRow <= lastRow
-        if @matches(currentRow, indentation)
-          lastMatchingRow = currentRow
-          currentRow = @next(currentRow, direction)
+      lastMatchingRow = @currentRow
+      while @rowIsValid()
+        if @matches()
+          lastMatchingRow = @currentRow
+          @advance()
         else
-          editor.setCursorBufferPosition([lastMatchingRow, column])
           break
+      
+      # always jump to last found row
+      # (even if adjacent lines continued to the very beginning/end of file)
+      @editor.setCursorBufferPosition([lastMatchingRow, @column])
     else
       # simply searching for the first matching row
-      while firstRow <= currentRow <= lastRow
-        if @matches(currentRow, indentation)
-          editor.setCursorBufferPosition([currentRow, column])
+      while @rowIsValid()
+        if @matches()
+          @editor.setCursorBufferPosition([@currentRow, @column])
           break
         else
-          currentRow = @next(currentRow, direction)
+          @advance()
   
-  next: (row, direction) ->
-    if direction is 'down'
-      row + 1
+  rowIsValid: ->
+    0 <= @currentRow <= @lastRow
+  
+  advance: (row = @currentRow) ->
+    if @direction is 'down'
+      @currentRow = row + 1
     else
-      row - 1
+      @currentRow = row - 1
   
-  getEditor: ->
-    atom.workspace.getActiveEditor()
-  
-  matches: (row, indentation) ->
-    line = @lineAt(row)
-    @getIndentationAt(line) is indentation and not @lineIsEmpty(line)
+  matches: ->
+    line = @lineAt(@currentRow)
+    @getIndentationAt(line) is @indentation and not @lineIsEmpty(line)
   
   lineAt: (row) ->
-    @getEditor().lineForBufferRow(row)
+    @editor.lineForBufferRow(row)
   
   getIndentationAt: (line) ->
     /^ */.exec(line)[0].length
