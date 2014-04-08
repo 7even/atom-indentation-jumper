@@ -1,7 +1,7 @@
 module.exports =
   activate: (state) ->
-    atom.workspaceView.command 'column-movement:down', => @down()
-    atom.workspaceView.command 'column-movement:up',   => @up()
+    atom.workspaceView.command 'indentation-jumper:down', => @down()
+    atom.workspaceView.command 'indentation-jumper:up',   => @up()
   
   deactivate: ->
   

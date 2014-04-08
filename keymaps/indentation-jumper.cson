@@ -8,5 +8,5 @@
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
 '.editor':
-  'alt-down': 'column-movement:down'
-  'alt-up':   'column-movement:up'
+  'alt-down': 'indentation-jumper:down'
+  'alt-up':   'indentation-jumper:up'

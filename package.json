@@ -1,10 +1,10 @@
 {
-  "name": "column-movement",
-  "main": "./lib/column-movement",
+  "name": "indentation-jumper",
+  "main": "./lib/indentation-jumper",
   "version": "0.0.0",
   "description": "Jump between lines of same indentation with `alt-up`/`alt-down`.",
-  "activationEvents": ["column-movement:down", "column-movement:up"],
-  "repository": "https://github.com/7even/atom-column-movement",
+  "activationEvents": ["indentation-jumper:down", "indentation-jumper:up"],
+  "repository": "https://github.com/7even/atom-indentation-jumper",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"

@@ -1,4 +1,4 @@
-# column-movement package
+# indentation-jumper package
 
 A short description of your package.
 
