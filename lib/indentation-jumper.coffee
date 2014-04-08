@@ -1,12 +1,5 @@
 module.exports =
-  activate: (state) ->
-    atom.workspaceView.command 'indentation-jumper:down', => @down()
-    atom.workspaceView.command 'indentation-jumper:up',   => @up()
-  
-  deactivate: ->
-  
-  serialize: ->
-  
+class IndentationJumper
   down: ->
     console.log 'moving down'
     @jump('down')

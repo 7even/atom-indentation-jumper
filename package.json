@@ -1,6 +1,6 @@
 {
   "name": "indentation-jumper",
-  "main": "./lib/indentation-jumper",
+  "main": "./lib/main",
   "version": "0.0.0",
   "description": "Jump between lines of same indentation with `alt-up`/`alt-down`.",
   "activationEvents": ["indentation-jumper:down", "indentation-jumper:up"],
