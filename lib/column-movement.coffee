@@ -9,58 +9,44 @@ module.exports =
   
   down: ->
     console.log 'moving down'
-    
-    editor = @getEditor()
-    {row} = editor.getCursorBufferPosition()
-    lineCount = editor.getScreenLineCount()
-    indentation = @getIndentationAt(@lineAt(row))
-    
-    currentRow = row + 1
-    if @matches(currentRow, indentation)
-      # search for last adjacent matching row
-      while currentRow < lineCount
-        if @matches(currentRow, indentation)
-          currentRow++
-        else
-          previousRow = currentRow - 1
-          editor.moveCursorDown(previousRow - row)
-          break
-    else
-      # jump to first matching row
-      while currentRow < lineCount
-        if @matches(currentRow, indentation)
-          # console.log currentRow + 1
-          editor.moveCursorDown(currentRow - row)
-          break
-        else
-          currentRow++
+    @jump('down')
   
   up: ->
     console.log 'moving up'
-    
+    @jump('up')
+  
+  jump: (direction) ->
     editor = @getEditor()
-    {row} = editor.getCursorBufferPosition()
+    {row, column} = editor.getCursorBufferPosition()
     indentation = @getIndentationAt(@lineAt(row))
     
-    currentRow = row - 1
+    [firstRow, lastRow] = [0, editor.getScreenLineCount() - 1]
+    lastMatchingRow = currentRow
+    
+    currentRow = @next(row, direction)
     if @matches(currentRow, indentation)
-      # search for last adjacent matching row
-      while currentRow >= 0
+      # searching the last of adjacent matching lines
+      while firstRow <= currentRow <= lastRow
         if @matches(currentRow, indentation)
-          currentRow--
+          lastMatchingRow = currentRow
+          currentRow = @next(currentRow, direction)
         else
-          previousRow = currentRow + 1
-          editor.moveCursorUp(row - previousRow)
+          editor.setCursorBufferPosition([lastMatchingRow, column])
           break
     else
-      # jump to first matching row
-      while currentRow >= 0
+      # simply searching for the first matching row
+      while firstRow <= currentRow <= lastRow
         if @matches(currentRow, indentation)
-          # console.log currentRow + 1
-          editor.moveCursorUp(row - currentRow)
+          editor.setCursorBufferPosition([currentRow, column])
           break
         else
-          currentRow--
+          currentRow = @next(currentRow, direction)
+  
+  next: (row, direction) ->
+    if direction is 'down'
+      row + 1
+    else
+      row - 1
   
   getEditor: ->
     atom.workspace.getActiveEditor()
