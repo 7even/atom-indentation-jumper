@@ -8,5 +8,7 @@
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
 '.editor':
-  'alt-down': 'indentation-jumper:down'
-  'alt-up':   'indentation-jumper:up'
+  'alt-down':       'indentation-jumper:down'
+  'alt-up':         'indentation-jumper:up'
+  'alt-shift-down': 'indentation-jumper:select-down'
+  'alt-shift-up':   'indentation-jumper:select-up'

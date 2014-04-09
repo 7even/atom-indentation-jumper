@@ -6,8 +6,16 @@ class IndentationJumper
     
     {@row, @column} = @editor.getCursorBufferPosition()
     @indentation = @getIndentationAt(@lineAt(@row))
+    
+    @findRow()
   
   jump: ->
+    @editor.setCursorBufferPosition([@foundRow, @column]) if @foundRow?
+  
+  select: ->
+    @editor.selectToScreenPosition([@foundRow, @column]) if @foundRow?
+  
+  findRow: ->
     @advance(@row)
     
     if @matches()
@@ -22,13 +30,13 @@ class IndentationJumper
       
       # always jump to last found row
       # (even if adjacent lines continued to the very beginning/end of file)
-      @editor.setCursorBufferPosition([lastMatchingRow, @column])
+      @foundRow = lastMatchingRow
     else
       # simply searching for the first matching row
       while @rowIsValid()
         if @matches()
-          @editor.setCursorBufferPosition([@currentRow, @column])
-          break
+          @foundRow = @currentRow
+          return
         else
           @advance()
   

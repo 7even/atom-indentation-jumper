@@ -3,7 +3,12 @@
   "main": "./lib/main",
   "version": "0.0.0",
   "description": "Jump between lines of same indentation with `alt-up`/`alt-down`.",
-  "activationEvents": ["indentation-jumper:down", "indentation-jumper:up"],
+  "activationEvents": [
+    "indentation-jumper:down",
+    "indentation-jumper:up",
+    "indentation-jumper:select-down",
+    "indentation-jumper:select-up"
+  ],
   "repository": "https://github.com/7even/atom-indentation-jumper",
   "license": "MIT",
   "engines": {
