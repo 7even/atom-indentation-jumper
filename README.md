@@ -1,5 +1,17 @@
-# indentation-jumper package
+# Indentation Jumper package
 
-A short description of your package.
+A simple package designed to ease the code navigation in Atom.
 
-![A screenshot of your spankin' package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+![demo](assets/demo.gif)
+
+### Hotkeys
+
+`⌥↓` - jump to next line with same indentation as the current line.
+
+`⌥↑` - jump to previous line with same indentation as the current line.
+
+`⇧⌥↓` - select down to next line with same indentation.
+
+`⇧⌥↑` - select up to previous line with same indentation.
+
+Heavily inspired by corresponding TextMate built-in functionality.
