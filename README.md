@@ -2,7 +2,7 @@
 
 A simple package designed to ease the code navigation in Atom.
 
-![demo](assets/demo.gif)
+![demo](https://cloud.githubusercontent.com/assets/351591/2673000/c47bcfa2-c0ed-11e3-9c2f-3edeedadba5a.gif)
 
 ### Hotkeys
 
