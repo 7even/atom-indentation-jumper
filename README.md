@@ -1,4 +1,4 @@
-# Indentation Jumper package
+# Indentation Jumper
 
 A simple package designed to ease the code navigation in Atom.
 
