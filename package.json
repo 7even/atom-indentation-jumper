@@ -1,7 +1,7 @@
 {
   "name": "indentation-jumper",
   "main": "./lib/main",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Jump between lines of same indentation with `alt-up`/`alt-down`.",
   "activationCommands": {
     "atom-workspace": [
