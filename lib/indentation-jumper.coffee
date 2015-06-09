@@ -1,7 +1,7 @@
 module.exports =
 class IndentationJumper
   constructor: (@direction) ->
-    @editor  = atom.workspace.getActiveEditor()
+    @editor  = atom.workspace.getActiveTextEditor()
     @lastRow = @editor.getScreenLineCount() - 1
     
     {@row, @column} = @editor.getCursorBufferPosition()
@@ -54,7 +54,7 @@ class IndentationJumper
     @getIndentationAt(line) is @indentation and not @lineIsEmpty(line)
   
   lineAt: (row) ->
-    @editor.lineForBufferRow(row)
+    @editor.lineTextForBufferRow(row)
   
   getIndentationAt: (line) ->
     /^ */.exec(line)[0].length
